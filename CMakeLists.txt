@@ -1,6 +1,6 @@
 # Standard routine
 cmake_minimum_required(VERSION 3.16)
-project(project_template_ui)
+project(project_template_prometheus)
 
 # Tip: in a production project don't use branch name, use a specific name tag (i.e. v1.1.1),
 # but for a sandbox project branch name is perfectly enough
@@ -15,13 +15,16 @@ include(${CMAKE_CURRENT_BINARY_DIR}/aui.boot.cmake)
 
 # import AUI
 auib_import(aui https://github.com/aui-framework/aui
-        COMPONENTS core views
+        COMPONENTS core curl crypt
         VERSION ${AUI_VERSION})
 
+# import prometheus-cpp
+auib_import(prometheus-cpp https://github.com/jupp0r/prometheus-cpp
+        VERSION v1.3.0)
 
 # Create the executable. This function automatically links all sources from the src/ folder,
 # creates CMake target and places the resulting executable to bin/ folder.
 aui_executable(${PROJECT_NAME})
 
 # Link required libs
-aui_link(${PROJECT_NAME} PRIVATE aui::core aui::views)
+aui_link(${PROJECT_NAME} PRIVATE aui::core prometheus-cpp::core prometheus-cpp::pull)
