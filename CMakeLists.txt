@@ -18,7 +18,7 @@ auib_import(aui https://github.com/aui-framework/aui
         COMPONENTS core curl crypt
         VERSION ${AUI_VERSION})
 
-# import prometheus-cpp
+# import prometheus-cpp. it uses zlib and curl, and aui.boot would pull them from aui since aui uses them as well.
 auib_import(prometheus-cpp https://github.com/jupp0r/prometheus-cpp
         VERSION v1.3.0)
 
